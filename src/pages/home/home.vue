@@ -1,78 +1,99 @@
 <template>
   <view class="page-container">
-    <!-- 卡片循环列表 -->
-    <!--    <view class="custom-card" v-for="item in cardList" :key="item.id" @click="goDetail(item.id)">-->
-    <!--      <image :src="item.cover" class="card-bg" mode="aspectFill" />-->
-    <!--      <view class="card-content">-->
-    <!--        <text class="card-title">{{ item.title }}</text>-->
-    <!--        <text class="card-desc">{{ item.desc }}</text>-->
-    <!--      </view>-->
-    <!--    </view>-->
-
-    <!--    <nut-tab-pane title="加载失败/错误">-->
-    <!--      <nut-empty image="error" description="加载失败/错误"></nut-empty>-->
-    <!--    </nut-tab-pane>-->
-    <!--    <nut-pull-refresh v-model:loading="isLoading" :duration="3" @refresh="onRefresh">-->
-    <!--      <div>这里是内容</div>-->
-    <!--    </nut-pull-refresh>-->
+    <!-- 添加下拉刷新容器 -->
+    <scroll-view
+      scroll-y
+      refresher-enabled
+      :refresher-triggered="isRefreshing"
+      @refresherrefresh="handleRefresh"
+      class="scroll-content"
+    >
+      <!-- 优化卡片循环结构 -->
+      <view
+        class="custom-card"
+        v-for="item in cardList"
+        :key="item.id"
+        @click="goDetail(item.id)"
+      >
+        <image
+          :src="item.cover"
+          class="card-bg"
+          mode="aspectFill"
+          :lazy-load="true"
+        />
+        <view class="card-content">
+          <text class="card-title">{{ item.title }}</text>
+          <text class="card-desc">{{ item.desc }}</text>
+        </view>
+      </view>
+    </scroll-view>
   </view>
 </template>
 
 <script setup>
-  const title = ref('Hello World!')
 
-  const cardList = ref([]) // 卡片数据列表
-  const isLoading = ref(false)
+  const cardList = ref([])
+  const isRefreshing = ref(false)
 
-  // 模拟获取数据
-  const fetchCards = () => {
-    // 模拟生成数据
-    const fakeData = Array.from({ length: 5 }, (_, i) => {
-      const id = i + 1
-      return {
-        id,
-        title: `标题 ${id}`,
-        desc: '这是描述信息',
-        cover: `https://picsum.photos/400/600?random=${id}` // 随机图片
-      }
+  // 异步获取数据
+  const fetchCards = async () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const fakeData = Array.from({ length: 5 }, (_, i) => ({
+          id: i + 1,
+          title: `优化标题 ${i + 1}`,
+          desc: '优化后的描述信息',
+          cover: `https://picsum.photos/400/600?random=${Date.now()}-${i}`
+        }))
+        resolve(fakeData)
+      }, 500)
     })
-
-    cardList.value = fakeData
   }
 
-  // 跳转详情页
-  // const goDetail = (id) => {
-  //   uni.navigateTo({ url: `/pages/card-detail?id=${id}` })
-  // }
+  // 统一处理数据加载
+  const loadData = async () => {
+    try {
+      cardList.value = await fetchCards()
+    } catch (error) {
+      uni.showToast({ title: '数据加载失败', icon: 'none' })
+    }
+  }
 
   // 下拉刷新处理
-  const onRefresh = () => {
-    setTimeout(() => {
-      fetchCards()
-      isLoading.value = false
-    }, 1000)
+  const handleRefresh = async () => {
+    isRefreshing.value = true
+    await loadData()
+    isRefreshing.value = false
   }
 
-  onMounted(() => {
-    fetchCards() // 页面加载时获取数据
+  // 页面跳转
+  const goDetail = (id) => {
+    uni.navigateTo({ url: `/pages/card-detail?id=${id}` })
+  }
+
+  onMounted(async() => {
+    await loadData()
   })
 </script>
 
 <style lang="scss" scoped>
   .page-container {
-    padding: 20rpx;
     background: #f5f5f5;
     min-height: 100vh;
+    .scroll-content {
+      height: 100%;
+    }
   }
 
   .custom-card {
     position: relative;
-    width: 100%;
+    width: calc(100% - 40rpx); /* 减去左右边距总和 */
     height: 220rpx; // 卡片高度
     border-radius: 20rpx;
     overflow: hidden;
-    margin-bottom: 20rpx;
+    margin: 0 20rpx 20rpx; /* 上 左右 下 */
     box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+    background: #dd524d;
   }
 
   .card-bg {
