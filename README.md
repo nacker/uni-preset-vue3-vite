@@ -2,6 +2,11 @@
 
 入门简单、开发简单、接近原生，适用于了解或不熟悉uniapp的开发人员去快速使用uniapp开发小程序、h5
 
+```markdown
+组件库：nutui-uniapp
+https://nutui-uniapp.pages.dev/
+```
+
 ## 特色
 
 - ⚡️[uni-app](https://github.com/dcloudio/uni-app), [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)

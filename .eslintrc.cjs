@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true,
+    node: true
   },
   extends: [
     'eslint:recommended',
@@ -14,23 +14,32 @@ module.exports = {
     // 1. 接入 prettier 的规则
     'prettier',
     'plugin:prettier/recommended',
+    'vue-global-api',
   ],
   overrides: [
     {
       env: {
-        node: true,
+        node: true
       },
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: 'script',
-      },
-    },
+        sourceType: 'script'
+      }
+    }
   ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    parser: '@babel/eslint-parser',
+    sourceType: 'module',
+  },
 
   plugins: [
+    '@babel/eslint-parser',
     'vue',
     // 2. 加入 prettier 的 eslint 插件
     'prettier',
+    // eslint-import-resolver-typescript 插件，@see https://www.npmjs.com/package/eslint-import-resolver-typescript
+    'import',
   ],
   rules: {
     // 3. 注意要加上这一句，开启 prettier 自动修复的功能
@@ -53,6 +62,16 @@ module.exports = {
     'no-undef': 'off',
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
+  },
+  // eslint-import-resolver-typescript 插件，@see https://www.npmjs.com/package/eslint-import-resolver-typescript
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    },
+    'import/resolver': {
+      typescript: {}
+    }
   },
   globals: {
     $t: true,
@@ -64,6 +83,6 @@ module.exports = {
     UniHelper: true,
     Page: true,
     App: true,
-    NodeJS: true,
-  },
+    NodeJS: true
+  }
 }

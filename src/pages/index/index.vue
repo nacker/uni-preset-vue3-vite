@@ -1,5 +1,7 @@
 <template>
   <view class="content">
+    <nut-button type="primary" @click="useCountStore.count++">点击 {{ count }}</nut-button>
+    <text class="i-ep-apple w-40rpx h-40rpx color-red"></text>
     <image class="logo" src="/static/logo.png"></image>
     <view class="text-area b-1px b-solid b-color-red">
       <text class="title mt-4">{{ title }}</text>
