@@ -1,0 +1,274 @@
+<template>
+  <scroll-view
+    class="scroll-view"
+    scroll-y="true"
+  >
+    <!-- 用户中心主页面 -->
+    <view class="user-page">
+      <!-- ==================== 顶部用户信息区域 ==================== -->
+      <view class="user-header">
+        <!-- 背景图片：使用高质量背景图增强视觉效果 -->
+        <image
+          class="header-bg"
+          src="https://cdn.pixabay.com/photo/2016/11/21/15/46/man-1845814_1280.jpg"
+          mode="aspectFill"
+        />
+
+        <!-- 渐变遮罩层：增强文字可读性 -->
+        <view class="overlay"></view>
+
+        <!-- 用户核心信息展示 -->
+        <view class="user-info">
+          <!-- 用户头像：圆形设计，带白色边框 -->
+          <nut-avatar class="avatar" size="90" :src="userInfo.avatar"/>
+
+          <!-- 用户名：突出显示 -->
+          <text class="username">{{ userInfo.name }}</text>
+
+          <!-- 用户ID：次要信息 -->
+          <text class="userid">ID: {{ userInfo.id }}</text>
+        </view>
+      </view>
+
+      <!-- ==================== 内容功能区域 ==================== -->
+      <view class="content">
+        <!-- 卡片1：常用功能 -->
+        <view class="card">
+          <!-- 分组标题：常用功能 -->
+          <nut-cell-group title="常用功能">
+            <!-- 我的订单 -->
+            <nut-cell
+              title="我的订单"
+              is-link
+              icon="order"
+              @click="navigateTo('/pages/order/list')"
+            />
+
+            <!-- 我的收藏 -->
+            <nut-cell
+              title="我的收藏"
+              is-link
+              icon="star-fill"
+              @click="navigateTo('/pages/favorites/list')"
+            />
+
+            <!-- 收货地址 -->
+            <nut-cell
+              title="收货地址"
+              is-link
+              icon="location"
+              @click="navigateTo('/pages/address/list')"
+            />
+          </nut-cell-group>
+        </view>
+
+        <!-- 卡片2：系统设置 -->
+        <view class="card">
+          <!-- 分组标题：系统设置 -->
+          <nut-cell-group title="系统设置">
+            <!-- 账号安全 -->
+            <nut-cell
+              title="账号与安全"
+              is-link
+              icon="safe"
+              @click="navigateTo('/pages/settings/security')"
+            />
+
+            <!-- 通知设置 -->
+            <nut-cell
+              title="通知设置"
+              is-link
+              icon="notice"
+              @click="navigateTo('/pages/settings/notification')"
+            />
+
+            <!-- 通用设置 -->
+            <nut-cell
+              title="通用设置"
+              is-link
+              icon="setting"
+              @click="navigateTo('/pages/settings/general')"
+            />
+
+            <!-- 隐私政策 -->
+            <nut-cell
+              title="隐私政策"
+              is-link
+              icon="protect"
+              @click="navigateTo('/pages/settings/privacy')"
+            />
+          </nut-cell-group>
+        </view>
+
+        <!-- 卡片3：关于信息 -->
+        <view class="card">
+          <nut-cell-group>
+            <!-- 关于我们 -->
+            <nut-cell
+              title="关于我们"
+              is-link
+              icon="info"
+              @click="navigateTo('/pages/about/index')"
+            />
+
+            <!-- 检查更新（带版本号） -->
+            <nut-cell
+              title="检查更新"
+              is-link
+              icon="refresh"
+              @click="checkUpdate"
+            >
+              <template #extra>
+                <text class="version">v1.2.0</text>
+              </template>
+            </nut-cell>
+          </nut-cell-group>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup>
+// ==================== 导入部分 ====================
+import {ref} from 'vue'
+
+// ==================== 数据定义 ====================
+// 用户信息数据
+const userInfo = ref({
+  name: '张小凡',        // 用户名
+  id: 'U20230521',      // 用户ID
+  avatar: 'https://img.yzcdn.cn/vant/cat.jpeg'  // 头像URL
+})
+
+// ==================== 方法定义 ====================
+/**
+ * 页面跳转方法
+ * @param {string} url - 目标页面路径
+ */
+const navigateTo = (url) => {
+  uni.navigateTo({url})
+}
+
+/**
+ * 检查应用更新
+ */
+const checkUpdate = () => {
+  uni.showToast({
+    title: '已是最新版本',
+    icon: 'none'
+  })
+}
+</script>
+
+<style lang="scss" scoped>
+/* ==================== 页面基础样式 ==================== */
+.scroll-view {
+  height: 100%;
+}
+.user-page {
+  background-color: #f7f8fa; // 页面背景色
+  min-height: 100vh; // 最小高度保证全屏
+}
+
+/* ==================== 顶部用户信息区域样式 ==================== */
+.user-header {
+  position: relative; // 相对定位
+  height: 500rpx; // 固定高度
+  border-bottom-left-radius: 40rpx; // 左下圆角
+  border-bottom-right-radius: 40rpx; // 右下圆角
+  overflow: hidden; // 隐藏溢出内容
+  box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.2); // 阴影效果
+
+  // 背景图片样式
+  .header-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // 保持比例填充
+  }
+
+  // 渐变遮罩层样式
+  .overlay {
+    position: absolute;
+    inset: 0; // 等同于top:0; right:0; bottom:0; left:0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+  }
+
+  // 用户信息容器样式
+  .user-info {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%); // 垂直居中
+    z-index: 2; // 置于遮罩层之上
+    display: flex;
+    flex-direction: column; // 垂直排列
+    align-items: center; // 水平居中
+    color: #fff; // 文字颜色
+
+    // 头像样式
+    .avatar {
+      border: 4rpx solid #fff; // 白色边框
+      box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.4); // 阴影效果
+      margin-bottom: 20rpx; // 下边距
+    }
+
+    // 用户名样式
+    .username {
+      font-size: 42rpx;
+      font-weight: bold;
+      margin-bottom: 10rpx;
+      text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.4); // 文字阴影
+    }
+
+    // 用户ID样式
+    .userid {
+      font-size: 26rpx;
+      opacity: 0.9; // 轻微透明
+    }
+  }
+}
+
+/* ==================== 内容区域样式 ==================== */
+.content {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+
+  // 卡片通用样式
+  .card {
+    background: #fff; // 白色背景
+    border-radius: 20rpx; // 圆角
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05); // 轻微阴影
+    margin-bottom: 20rpx; // 卡片间距
+    overflow: hidden; // 隐藏溢出内容
+
+    // 分组标题样式
+    ::v-deep .nut-cell-group__title {
+      //padding: 0rpx 0rpx 0rpx 30rpx; // 内边距
+      margin-left: 10rpx; // 外边距
+      font-size: 30rpx;
+      color: #666; // 灰色文字
+    }
+
+    // 单元格通用样式
+    ::v-deep .nut-cell {
+      font-size: 30rpx; // 字体大小
+    }
+
+    // 图标颜色统一
+    ::v-deep .nut-icon {
+      color: #4facfe; // 主题蓝色
+    }
+  }
+
+  // 版本号样式
+  .version {
+    font-size: 26rpx;
+    color: #999; // 浅灰色
+    margin-right: 10rpx;
+  }
+}
+</style>
