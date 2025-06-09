@@ -249,6 +249,7 @@ const checkUpdate = () => {
     ::v-deep .nut-cell-group__title {
       //padding: 0rpx 0rpx 0rpx 30rpx; // 内边距
       margin-left: 10rpx; // 外边距
+      margin-top: 30rpx; // 外边距
       font-size: 30rpx;
       color: #666; // 灰色文字
     }
