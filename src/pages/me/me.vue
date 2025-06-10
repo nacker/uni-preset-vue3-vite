@@ -108,7 +108,7 @@
               title="关于我们"
               is-link
               icon="info"
-              @click="navigateTo('/pages/about/index')"
+              @click="navigateTo('/pages/about/about')"
             />
 
             <!-- 检查更新（带版本号） -->

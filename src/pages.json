@@ -6,7 +6,20 @@
       "^nut-(.*)": "nutui-uniapp/components/$1/$1.vue"
     }
   },
-  "pages": [{
+  "pages": [
+    {
+      "path": "pages/user/login",
+      "type": "login",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#1296db",
+        "backgroundTextStyle": "dark",
+        "navigationStyle": "custom"
+      }
+    },
+    {
       "path": "pages/home/home",
       "type": "home",
       "layout": "default",
@@ -39,7 +52,21 @@
         "navigationBarTitleText": "我的",
         "navigationStyle": "custom", // 新增隐藏导航栏配置
       }
+    },
+    {
+      "path": "pages/about/about",
+      "style": {
+        "navigationBarTitleText": "关于我们"
+        }
+    },
+    {
+      "path": "pages/about/privacy-policy/privacy-policy",
+      "style": {
+        "navigationBarTitleText": "隐私政策"
+      }
     }
+
+
   ],
   "tabBar": {
     "color": "#bfbfbf",
