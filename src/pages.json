@@ -60,15 +60,16 @@
         }
     },
     {
-      "path": "pages/me/about/privacy-policy/privacy-policy",
+      "path": "pages/me/faceback/faceback",
       "style": {
-        "navigationBarTitleText": "隐私政策"
+        "navigationBarTitleText": "",
+        "backgroundColor": "#FFFFFF"
       }
     },
     {
       "path": "pages/webview/webview",
       "style": {
-        "navigationBarTitleText": "加载中...",
+        "navigationBarTitleText": "",
         "backgroundColor": "#FFFFFF"
       }
     }

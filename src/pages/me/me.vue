@@ -65,23 +65,23 @@
               title="意见反馈"
               is-link
               icon="protect"
-              @click="navigateTo('/pages/settings/privacy')"
+              @click="navigateTo('/pages/me/faceback/faceback')"
             />
 
-            <nut-cell
-              title="隐私政策"
-              is-link
-              icon="protect"
-              @click="navigateTo('/pages/settings/privacy')"
-            />
+<!--            <nut-cell-->
+<!--              title="隐私政策"-->
+<!--              is-link-->
+<!--              icon="protect"-->
+<!--              @click="navigateTo('/pages/settings/privacy')"-->
+<!--            />-->
 
-<!--            用户协议-->
-            <nut-cell
-              title="用户协议"
-              is-link
-              icon="protect"
-              @click="navigateTo('/pages/settings/privacy')"
-            />
+<!--&lt;!&ndash;            用户协议&ndash;&gt;-->
+<!--            <nut-cell-->
+<!--              title="用户协议"-->
+<!--              is-link-->
+<!--              icon="protect"-->
+<!--              @click="navigateTo('/pages/settings/privacy')"-->
+<!--            />-->
 
           </nut-cell-group>
         </view>
