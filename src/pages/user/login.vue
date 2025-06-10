@@ -180,29 +180,36 @@ const getVerificationCode = () => {
  * 4. 模拟登录请求
  */
 const handleLogin = () => {
-  if (!phoneNumber.value || phoneNumber.value.length !== 11) {
-    uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
-    return;
-  }
-
-  if (!verificationCode.value) {
-    uni.showToast({ title: '请输入验证码', icon: 'none' });
-    return;
-  }
-
-  if (!isAgreed.value) {
-    uni.showToast({ title: '请先同意协议', icon: 'none' });
-    return;
-  }
 
   uni.showLoading({ title: '登录中...' });
   setTimeout(() => {
     uni.hideLoading();
-    uni.showToast({ title: '登录成功', icon: 'success' });
-    uni.reLaunch({ url: '/pages/index/index' });
-    // 登录成功后隐藏空状态
-    showEmpty.value = false;
-  }, 1500);
+    uni.reLaunch({ url: '/pages/home/home' }); // 直接跳转到首页并关闭所有页面
+  }, 500); // 保留短暂延迟保证加载动画可见
+
+  // if (!phoneNumber.value || phoneNumber.value.length !== 11) {
+  //   uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
+  //   return;
+  // }
+  //
+  // if (!verificationCode.value) {
+  //   uni.showToast({ title: '请输入验证码', icon: 'none' });
+  //   return;
+  // }
+  //
+  // if (!isAgreed.value) {
+  //   uni.showToast({ title: '请先同意协议', icon: 'none' });
+  //   return;
+  // }
+  //
+  // uni.showLoading({ title: '登录中...' });
+  // setTimeout(() => {
+  //   uni.hideLoading();
+  //   uni.showToast({ title: '登录成功', icon: 'success' });
+  //   uni.reLaunch({ url: '/pages/index/index' });
+  //   // 登录成功后隐藏空状态
+  //   showEmpty.value = false;
+  // }, 1500);
 }
 </script>
 
@@ -211,8 +218,9 @@ const handleLogin = () => {
 .login-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; // 修改：将min-height改为固定高度100vh，确保容器占满视口
-  background-color: #f8f9fa; // 浅灰色背景提升质感
+  height: 100vh;
+  background-color: #f8f9fa;
+  flex-grow: 1; /* 确保容器可以扩展以容纳内容 */
 }
 
 .nut-swiper-item {
@@ -245,6 +253,7 @@ const handleLogin = () => {
     align-items: center;
 
     .logo {
+      margin-top: 50rpx;
       width: 140rpx;
       height: 140rpx;
       border-radius: 20rpx; // 添加Logo圆角
@@ -311,11 +320,8 @@ const handleLogin = () => {
       font-size: 30rpx;
       border: 2rpx solid #e9ecef;
       transition: border-color 0.3s;
-      box-sizing: border-box; // 关键修改：设置盒模型为border-box，包含内边距和边框
-
-      &:focus {
-        border-color: #1890FF;
-      }
+      box-sizing: border-box;
+      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1); /* 柔和的阴影效果 */
     }
 
     .get-code-btn {
@@ -432,5 +438,24 @@ const handleLogin = () => {
   }
 }
 
+button {
+  border: none;
+  outline: none;
+  background-color: #1890FF;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 50rpx;
+  padding: 0 40rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  transition: opacity 0.3s;
+}
 
+button[disabled] {
+  opacity: 0.6;
+}
+
+button:active {
+  transform: scale(0.98); /* 所有按钮统一的点击反馈 */
+}
 </style>

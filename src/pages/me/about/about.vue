@@ -18,15 +18,19 @@
 </template>
 
 <script setup lang="ts">
-  // 跳转到内部隐私政策页面
-  const navigateToPrivacyPolicy = () => {
-    uni.navigateTo({ url: '/pages/about/privacy-policy/privacy-policy' });
-  };
+// 跳转到内部隐私政策页面（修改后）
+const navigateToPrivacyPolicy = () => {
+  uni.navigateTo({
+    url: '/pages/webview/webview?url=https://www.baidu.com'
+  });
+};
 
-  // 跳转到用户协议页面
-  const navigateToUserAgreement = () => {
-    uni.navigateTo({ url: '/pages/user-agreement' });
-  };
+// 跳转到用户协议页面（修改后）
+const navigateToUserAgreement = () => {
+  uni.navigateTo({
+    url: '/pages/webview/webview?url=https://www.baidu.com'
+  });
+};
 </script>
 
 <style scoped>

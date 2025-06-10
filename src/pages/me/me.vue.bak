@@ -32,10 +32,41 @@
 
       <!-- ==================== 内容功能区域 ==================== -->
       <view class="content">
+<!--        &lt;!&ndash; 卡片1：常用功能 &ndash;&gt;-->
+<!--        <view class="card">-->
+<!--          &lt;!&ndash; 分组标题：常用功能 &ndash;&gt;-->
+<!--          <nut-cell-group title="常用功能">-->
+<!--            &lt;!&ndash; 我的订单 &ndash;&gt;-->
+<!--            <nut-cell-->
+<!--              title="我的订单"-->
+<!--              is-link-->
+<!--              icon="order"-->
+<!--              @click="navigateTo('/pages/order/list')"-->
+<!--            />-->
+
+<!--            &lt;!&ndash; 我的收藏 &ndash;&gt;-->
+<!--            <nut-cell-->
+<!--              title="我的收藏"-->
+<!--              is-link-->
+<!--              icon="star-fill"-->
+<!--              @click="navigateTo('/pages/favorites/list')"-->
+<!--            />-->
+
+<!--            &lt;!&ndash; 收货地址 &ndash;&gt;-->
+<!--            <nut-cell-->
+<!--              title="收货地址"-->
+<!--              is-link-->
+<!--              icon="location"-->
+<!--              @click="navigateTo('/pages/address/list')"-->
+<!--            />-->
+<!--          </nut-cell-group>-->
+<!--        </view>-->
+
         <!-- 卡片2：系统设置 -->
         <view class="card">
           <!-- 分组标题：系统设置 -->
-          <nut-cell-group title="">
+          <nut-cell-group title="帮助">
+<!--            &lt;!&ndash; 账号安全 &ndash;&gt;-->
 <!--            <nut-cell-->
 <!--              title="账号与安全"-->
 <!--              is-link-->

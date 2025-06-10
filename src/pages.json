@@ -54,15 +54,22 @@
       }
     },
     {
-      "path": "pages/about/about",
+      "path": "pages/me/about/about",
       "style": {
         "navigationBarTitleText": "关于我们"
         }
     },
     {
-      "path": "pages/about/privacy-policy/privacy-policy",
+      "path": "pages/me/about/privacy-policy/privacy-policy",
       "style": {
         "navigationBarTitleText": "隐私政策"
+      }
+    },
+    {
+      "path": "pages/webview/webview",
+      "style": {
+        "navigationBarTitleText": "加载中...",
+        "backgroundColor": "#FFFFFF"
       }
     }
 
