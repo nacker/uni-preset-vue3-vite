@@ -87,7 +87,7 @@
     </view>
 
     <!-- 第三方登录区域 -->
-    <view class="third-login">
+    <view class="third-login" v-if="!showEmpty">
       <!-- 分割线与提示文本 -->
       <view class="divider">
         <view class="line"></view>
@@ -101,12 +101,15 @@
       </button>
     </view>
 
-
+    <nut-empty description="无数据" v-if="showEmpty"></nut-empty>
   </view>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+// 响应式变量：控制空状态显示
+const showEmpty = ref(false)
 
 // 响应式变量：当前激活的标签（登录/注册）
 const activeTab = ref('login')
@@ -156,17 +159,17 @@ const handleWeChatLogin = () => {
  */
 const getVerificationCode = () => {
   if (!phoneNumber.value || phoneNumber.value.length !== 11) {
-    uni.showToast({ title: '请输入正确的手机号', icon: 'none' })
-    return
+    uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
+    return;
   }
 
-  countdown.value = 60
+  countdown.value = 60;
   const timer = setInterval(() => {
-    countdown.value--
-    if (countdown.value <= 0) clearInterval(timer)
-  }, 1000)
+    countdown.value--;
+    if (countdown.value <= 0) clearInterval(timer);
+  }, 1000);
 
-  uni.showToast({ title: '验证码已发送', icon: 'none' })
+  uni.showToast({ title: '验证码已发送', icon: 'none' });
 }
 
 /**
@@ -178,26 +181,28 @@ const getVerificationCode = () => {
  */
 const handleLogin = () => {
   if (!phoneNumber.value || phoneNumber.value.length !== 11) {
-    uni.showToast({ title: '请输入正确的手机号', icon: 'none' })
-    return
+    uni.showToast({ title: '请输入正确的手机号', icon: 'none' });
+    return;
   }
 
   if (!verificationCode.value) {
-    uni.showToast({ title: '请输入验证码', icon: 'none' })
-    return
+    uni.showToast({ title: '请输入验证码', icon: 'none' });
+    return;
   }
 
   if (!isAgreed.value) {
-    uni.showToast({ title: '请先同意协议', icon: 'none' })
-    return
+    uni.showToast({ title: '请先同意协议', icon: 'none' });
+    return;
   }
 
-  uni.showLoading({ title: '登录中...' })
+  uni.showLoading({ title: '登录中...' });
   setTimeout(() => {
-    uni.hideLoading()
-    uni.showToast({ title: '登录成功', icon: 'success' })
-    uni.reLaunch({ url: '/pages/index/index' })
-  }, 1500)
+    uni.hideLoading();
+    uni.showToast({ title: '登录成功', icon: 'success' });
+    uni.reLaunch({ url: '/pages/index/index' });
+    // 登录成功后隐藏空状态
+    showEmpty.value = false;
+  }, 1500);
 }
 </script>
 
@@ -208,6 +213,14 @@ const handleLogin = () => {
   flex-direction: column;
   height: 100vh; // 修改：将min-height改为固定高度100vh，确保容器占满视口
   background-color: #f8f9fa; // 浅灰色背景提升质感
+}
+
+.nut-swiper-item {
+  line-height: 150px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 // 顶部背景区域样式
@@ -418,4 +431,6 @@ const handleLogin = () => {
     }
   }
 }
+
+
 </style>
