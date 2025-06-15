@@ -72,9 +72,14 @@
         "navigationBarTitleText": "",
         "backgroundColor": "#FFFFFF"
       }
+    },
+    {
+      "path": "pages/home/video_down/video_down",
+      "style": {
+        "navigationBarTitleText": "",
+        "backgroundColor": "#FFFFFF"
+      }
     }
-
-
   ],
   "tabBar": {
     "color": "#bfbfbf",

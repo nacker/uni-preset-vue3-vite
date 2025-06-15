@@ -96,7 +96,8 @@ const handleRefresh = async () => {
  * @param {number} id - 卡片ID
  */
 const goDetail = (id) => {
-  uni.navigateTo({ url: `/pages/card-detail?id=${id}` })
+  // uni.navigateTo({ url: `/pages/card-detail?id=${id}` })
+  uni.navigateTo({ url: `/pages/home/video_down/video_down` })
 }
 
 // 组件挂载后自动加载数据

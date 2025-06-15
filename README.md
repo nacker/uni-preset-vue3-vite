@@ -1,82 +1,144 @@
-# UniApp、Vite、Vue3、Pinia、Unocss 小程序、H5 项目模板
+# UniApp + Vite + Vue3 + Pinia + Unocss 多端项目模板
 
-入门简单、开发简单、接近原生，适用于了解或不熟悉uniapp的开发人员去快速使用uniapp开发小程序、h5
+一个基于最新技术栈的UniApp项目模板，支持小程序、H5等多端开发，提供完整的开发工具链和最佳实践。
 
-```markdown
-组件库：nutui-uniapp
-https://nutui-uniapp.pages.dev/
+## ✨ 技术栈
+
+- 🚀 核心框架: [Vue 3](https://vuejs.org/) + [Vite](https://vitejs.dev/) + [UniApp](https://uniapp.dcloud.io/)
+- 🍍 状态管理: [Pinia](https://pinia.vuejs.org/) + [pinia-plugin-persistedstate](https://github.com/prazdevs/pinia-plugin-persistedstate)
+- 🌐 HTTP客户端: [Axios](https://axios-http.com/)
+- 💅 UI组件: [NutUI-Uniapp](https://nutui-uniapp.pages.dev/)
+- 🌍 国际化: [vue-i18n](https://vue-i18n.intlify.dev/)
+- 🎨 原子化CSS: [UnoCSS](https://unocss.dev/)
+- 🔌 自动导入: [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import) + [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+
+## 📁 项目结构
+
+```
+├── src
+│   ├── api                  # API请求封装
+│   │   ├── modules         # API模块
+│   │   ├── request.js      # Axios实例
+│   │   └── service.js      # 请求服务
+│   ├── layouts             # 布局组件
+│   ├── pages               # 页面组件
+│   │   ├── home            # 首页
+│   │   ├── interaction     # 交互页
+│   │   ├── me              # 个人中心
+│   │   └── user            # 用户相关
+│   ├── static              # 静态资源
+│   ├── store               # 状态管理
+│   │   ├── app.js         # 应用状态
+│   │   ├── count.js       # 示例状态
+│   │   └── index.js       # Pinia实例
+│   └── styles             # 全局样式
 ```
 
-## 特色
+## 🚀 快速开始
 
-- ⚡️[uni-app](https://github.com/dcloudio/uni-app), [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
+### 环境准备
 
-- 📦 [组件自动化引入](https://github.com/antfu/unplugin-vue-components)
+1. 确保已安装 [Node.js](https://nodejs.org/) (推荐 v18+)
+2. 安装 [pnpm](https://pnpm.io/): `npm install -g pnpm`
 
-- 🍍 [使用 Pinia 的状态管理](https://pinia.vuejs.org)
-
-- 🎨 [UnoCSS](https://github.com/unocss/unocss) - 高性能且极具灵活性的即时原子化 CSS 引擎
-
-- 😃 [各种图标集为你所用](https://icon-sets.iconify.design/)
-
-- 🔥 使用 [新的 `<script setup>` 语法](https://github.com/vuejs/rfcs/pull/227)
-
-- 📥 [API 自动加载](https://github.com/antfu/unplugin-auto-import) - 直接使用 Composition API 无需引入
-
-- 🌍 [API 采用模块化自动导入方式](https://blog.csdn.net/qq_43775179/article/details/134811292) 根据demo.js文件设置接口，以API_xxx_method的方式命名，在请求时无需导入 直接使用useRequest()函数返回参数以解构的方式获取，拿到即为写入的接口
-
-## 🍭 安装使用
-
-🍙 获取项目代码
+### 开发运行
 
 ```bash
+# 克隆项目
 git clone https://github.com/nacker/uni-preset-vue3-vite.git
-```
 
-🌈 安装依赖
-
-```bash
+# 安装依赖
 pnpm install
-```
 
-🐥 运行
-
-```bash
+# 开发微信小程序
 pnpm dev:mp-weixin
+
+# 开发H5
+pnpm dev:h5
+
+# 开发支付宝小程序
+pnpm dev:mp-alipay
 ```
 
-🍁 打包
+### 生产构建
 
 ```bash
+# 构建微信小程序
 pnpm build:mp-weixin
+
+# 构建H5
+pnpm build:h5
 ```
 
-🍄 Git 提交
+## 📚 开发指南
+
+### API使用
+
+项目采用模块化API设计，所有API定义在`src/api/modules`目录下。使用示例：
+
+```javascript
+// 在组件中直接使用API
+const { data, error, loading } = useRequest(API_user_login_post({ username, password }))
+```
+
+### 状态管理
+
+使用Pinia进行状态管理，状态模块定义在`src/store`目录下。使用示例：
+
+```javascript
+// 在组件中使用store
+const appStore = useAppStore()
+const { theme } = storeToRefs(appStore)
+```
+
+### 样式指南
+
+1. 优先使用UnoCSS原子类
+2. 全局样式定义在`src/styles`目录
+3. 组件样式使用scoped CSS
+
+## 🛠️ 构建与部署
+
+支持多种平台构建：
 
 ```bash
-pnpm cz
+# 微信小程序
+pnpm build:mp-weixin
+
+# H5
+pnpm build:h5
+
+# 支付宝小程序
+pnpm build:mp-alipay
 ```
 
-## 🍣 Git 规范
+## 📝 代码规范
 
-参考 [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范 ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))
+### Git提交规范
 
-- `✨ feat` 增加新功能
-- `🐛 fix` 修复问题/BUG
-- `🎉 init` 初始化
-- `📝 docs` 文档变更
-- `💄 style` 代码格式(不影响代码运行的变动)
-- `♻️ refactor` 重构(既不是增加feature，也不是修复bug)
-- `⚡️ perf` 性能优化
-- `✅ test` 增加测试
-- `⏪️ revert` 回退
-- `🚀‍ build` 构建过程或辅助工具的变动
-- `👷 ci` CI 配置
+遵循Conventional Commits规范：
 
-## 🌯 Git 提交流程
+- `✨ feat`: 新增功能
+- `🐛 fix`: 修复bug
+- `📝 docs`: 文档变更
+- `💄 style`: 代码样式变更
+- `♻️ refactor`: 代码重构
+- `⚡️ perf`: 性能优化
+- `✅ test`: 测试相关
+- `🔧 chore`: 构建/工具变更
+
+提交示例：
 
 ```bash
 git add .
-
-pnpm run cz
+pnpm cz
 ```
+
+## 🤝 贡献指南
+
+1. Fork项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'feat: add AmazingFeature'`)
+4. 推送分支 (`git push origin feature/AmazingFeature`)
+5. 提交Pull Request
+>
